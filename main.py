@@ -9,11 +9,22 @@ GROUP_LINK = os.getenv("GROUP_LINK")
 # Command: /start
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = update.effective_user
-    await update.message.reply_text(
-        f"Hi {user.first_name}, welcome to The Snug! 🦥\n\n"
-        f"Here's your one-time access link to join the private group:\n{GROUP_LINK}\n\n"
-        f"Please do not share this link — it's just for you!"
-    )
+    group_link = os.getenv("GROUP_LINK")
+
+    if group_link:
+        message = (
+            f"Hi {user.first_name}, welcome to The Snug! 🦥\n\n"
+            f"Here’s your one-time access link to join the private group:\n{group_link}\n\n"
+            f"Please do not share this link — it's just for you!"
+        )
+    else:
+        message = (
+            f"Hi {user.first_name}, welcome to The Snug! 🦥\n\n"
+            "Unfortunately, the invite link is currently unavailable. Please try again later."
+        )
+
+    await update.message.reply_text(message)
+
 
 # Main function
 if __name__ == "__main__":
