@@ -2,6 +2,7 @@ import logging
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ContextTypes, filters
 import os
+# Trigger redeploy
 
 BOT_TOKEN = os.environ.get("BOT_TOKEN")
 GROUP_LINK = os.environ.get("GROUP_LINK")
