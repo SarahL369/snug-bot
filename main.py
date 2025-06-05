@@ -57,8 +57,7 @@ async def verify(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         f"✅ Thanks {user.first_name}, your code is valid!\n\n"
         f"📩 Please check your private messages from <b>@TheSnugBot</b> — it contains your one-time invite to The Snug Lounge.\n\n"
-        f"⚠️ If you don’t see a DM, first message the bot directly to open the chat: @TheSnugBot",
-        parse_mode="HTML"
+        f"⚠️ If you don’t see a DM, first message the bot directly to open the chat: @TheSnugBot"
     )
 
     # Send invite link privately
@@ -82,15 +81,14 @@ async def verify(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 f"👤 <b>{user.full_name}</b> just verified with code <code>{code}</code>\n"
                 f"🕒 {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n"
                 f"🔗 <a href='tg://user?id={user.id}'>View Profile</a>"
-            ),
-            parse_mode="HTML"
+            )
         )
     except Exception as e:
         print(f"Error sending log to mod group: {e}")
 
 # Main app setup
 if __name__ == "__main__":
-    app = ApplicationBuilder().token(BOT_TOKEN).build()
+    app = ApplicationBuilder().token(BOT_TOKEN).parse_mode("HTML").build()
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("verify", verify))
     app.run_polling()
